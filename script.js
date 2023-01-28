@@ -21,83 +21,61 @@ function getComputerChoice(){
 
 }
 
-function playerSelection(choice){
-
-    return choice
-}
 
 function RockPaperScissors(player){
     computer = getComputerChoice();
 
     if(player == "rock" && computer == "scissors"){
         player_score++
-        alert("You Win! Rock beats Scissors")
-        return "You Win! Rock beats Scissors"
+        printResult('You Win! Rock beats Scissors')
     }
 
     else if(player == "paper" && computer == "rock"){
         player_score++
-        alert("You Win! Paper beats Rock")
-        return "You Win! Paper beats Rock"
+        printResult('You Win! Paper beats Rock')
     }
 
     else if(player == "scissors" && computer == "paper"){
         player_score++
-        alert("You Win! Scissors beats Paper")
-        return "You Win! Scissors beats Paper"
+        printResult('You Win! Scissors beats Paper')
     }
 
     else if(computer == "rock" && player == "scissors"){
         computer_score++
-        alert("You Lose! Rock beats Scissors")
-        return "You Lose! Rock beats Scissors"
+        printResult('You Lose! Rock beats Scissors')
     }
 
     else if(computer == "paper" && player == "rock"){
         computer_score++
-        alert("You Lose! Paper beats Rock")
-        return "You Lose! Paper beats Rock"
+        printResult('You Lose! Paper beats Rock')
     }
 
     else if(computer == "scissors" && player == "paper"){
         computer_score++
-        alert("You Lose! Scissors beats Paper")
-        return "You Lose! Scissors beats Paper"
+        printResult('You Lose! Scissors beats Paper')
     }
 
     else{
-        alert("Tie, try again")
-        return "Tie, try again"
+        printResult('Tie, try again')
     }
 
+    document.querySelector('.score .player').textContent = (`Player Score: ${player_score}`)
+    document.querySelector('.score .computer').textContent = (`Computer Score: ${computer_score}`)
+    
+    if(player_score == 5 || computer_score == 5){
+        if(player_score > computer_score){
+            alert('Congrats! You win!')
+        }
 
-}
+        else if(computer_score > player_score){
+            alert('Sorry, Computer wins.')
+        }
 
-function game(){
-    for(let i = 0; i < 1; i++){
-        console.log(RockPaperScissors())
-        console.log(`Player Score: ${player_score}`)
-        console.log(`Computer Score: ${computer_score}`)
-
+        player_score = 0, computer_score = 0
+        document.querySelector('.score .player').textContent = (`Player Score: ${player_score}`)
+        document.querySelector('.score .computer').textContent = (`Computer Score: ${computer_score}`)
     }
 
-    if(player_score > computer_score){
-        console.log(`Player Score: ${player_score}`)
-        console.log(`Computer Score: ${computer_score}`)
-        console.log("Player wins!")
-    }
-
-    else if(computer_score > player_score){
-        console.log(`Player Score: ${player_score}`)
-        console.log(`Computer Score: ${computer_score}`)
-        console.log("Computer wins!")
-    }
-
-    else{
-        console.log(`Player Score: ${player_score}`)
-        console.log(`Computer Score: ${computer_score}`)
-        console.log("It's a tie!")
-    }
 }
 
 const btn = document.querySelectorAll('button');
@@ -106,3 +84,10 @@ btn.forEach((button) => {
         RockPaperScissors(button.id);
     });
 });
+
+
+const container = document.querySelector('.result');
+
+function printResult(prompt){
+    container.textContent = prompt;
+}
